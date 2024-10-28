@@ -12,6 +12,8 @@ namespace Sistema_de_tarefas.Data.Map
             builder.Property(x => x.Nome).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Descricao).IsRequired().HasMaxLength(1000);
             builder.Property(x => x.Status).IsRequired(); 
+            builder.Property(x => x.Titulo).IsRequired().HasMaxLength(150);
+            
         }
     }
 }

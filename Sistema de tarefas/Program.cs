@@ -1,9 +1,11 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sistema_de_tarefas.Data;
 using Sistema_de_tarefas.Repositorios;
 using Sistema_de_tarefas.Repositorios.Interface;
+using Npgsql;
 
 namespace Sistema_de_tarefas
 {
@@ -21,11 +23,13 @@ namespace Sistema_de_tarefas
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddEntityFrameworkSqlServer()
-                .AddDbContext<SistemaTarefasDBContex>(
-                options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
-                );
+               .AddDbContext<SistemaTarefasDBContex>(
+               options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+               );
 
             builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+
+            
 
 
             var app = builder.Build();
