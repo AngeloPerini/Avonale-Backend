@@ -9,10 +9,7 @@ namespace Sistema_de_tarefas.Repositorios
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
         private readonly SistemaTarefasDBContex _dbContext;
-        public UsuarioRepositorio(SistemaTarefasDBContex sisteTarefasDBContex0)
-        {
-            _dbContext = _dbContext;
-        }
+        public UsuarioRepositorio(SistemaTarefasDBContex sisteTarefasDBContex0) => _dbContext = _dbContext;
 
 
         public async Task<UsuarioModel> BuscarPorId(int id)
