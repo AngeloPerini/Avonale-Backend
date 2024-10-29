@@ -6,6 +6,7 @@ using Sistema_de_tarefas.Data;
 using Sistema_de_tarefas.Repositorios;
 using Sistema_de_tarefas.Repositorios.Interface;
 using Npgsql;
+using Sistema_de_tarefas.Data;
 
 namespace Sistema_de_tarefas
 {
@@ -22,12 +23,13 @@ namespace Sistema_de_tarefas
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddEntityFrameworkSqlServer()
-               .AddDbContext<SistemaTarefasDBContex>(
-               options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
-               );
+            // conexão com postgre
+            builder.Services.AddDbContext<SistemaTarefasDBContex>(options
+                =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 
-            builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            });
 
             
 
