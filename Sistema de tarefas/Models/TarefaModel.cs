@@ -1,10 +1,11 @@
 ﻿using Sistema_de_tarefas.Enuns;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sistema_de_tarefas.Models
 {
     public class TarefaModel
     {
-
+        [Key]
         public required int Id { get; set; }
         public required string? Nome { get; set; }    
         public string? Descricao { get; set; }

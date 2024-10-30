@@ -8,10 +8,20 @@ namespace Sistema_de_tarefas.Repositorios
     {
 
         private readonly SistemaTarefasDBContex _dbContext;
-        public TarefaRepositorio(SistemaTarefasDBContex sisteTarefasDBContex0)
+
+        public SistemaTarefasDBContex Dbcontext
         {
-            _dbContext = _dbContext;
+            get { return _dbContext; }
+
         }
+
+        public TarefaRepositorio(SistemaTarefasDBContex dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+
+        // erro por falta de conexão com o banco
         public async Task<TarefaModel> BuscarPorId(int id)
         {
             return await _dbContext.Tarefa.FirstOrDefaultAsync(x => x.Id == id);
