@@ -30,6 +30,8 @@ namespace Sistema_de_tarefas
 
             });
 
+            builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            builder.Services.AddScoped<ITarefaRepositorio, TarefaRepositorio>(); 
             
 
 

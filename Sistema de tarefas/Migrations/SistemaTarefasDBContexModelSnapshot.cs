@@ -35,11 +35,6 @@ namespace Sistema_de_tarefas.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
                     b.Property<string>("Prioridade")
                         .IsRequired()
                         .HasColumnType("text");

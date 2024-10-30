@@ -32,11 +32,10 @@ namespace Sistema_de_tarefas.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nome = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Titulo = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     Descricao = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
                     Prioridade = table.Column<string>(type: "text", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
-                    Titulo = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
                     UsuarioId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>

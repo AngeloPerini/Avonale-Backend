@@ -1,34 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sistema_de_tarefas.Data;
 using Sistema_de_tarefas.Models;
+using Sistema_de_tarefas.Repositorios.Interface;
 
 namespace Sistema_de_tarefas.Repositorios
 {
-    public class TarefaRepositorio
+    public class TarefaRepositorio : ITarefaRepositorio
     {
 
         private readonly SistemaTarefasDBContex _dbContext;
 
-        public SistemaTarefasDBContex Dbcontext
+        public TarefaRepositorio(SistemaTarefasDBContex sistemaTarefasDBContex)
         {
-            get { return _dbContext; }
-
+            _dbContext = sistemaTarefasDBContex;
         }
 
-        public TarefaRepositorio(SistemaTarefasDBContex dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-
-        // erro por falta de conexão com o banco
         public async Task<TarefaModel> BuscarPorId(int id)
         {
-            return await _dbContext.Tarefa.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Tarefa
+                .Include(x => x.Usuario) // feito para associar o Id do Usuario e puxar as informações do mesmo
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<List<TarefaModel>> BuscarTarefas()
+        public async Task<List<TarefaModel>> BuscarTodasTarefas()
         {
-            return await _dbContext.Tarefa.ToListAsync();
+            return await _dbContext.Tarefa
+                .Include(x => x.Usuario)
+                .ToListAsync();
         }
         public async Task<TarefaModel> Adicionar(TarefaModel tarefa)
         {
@@ -45,9 +42,8 @@ namespace Sistema_de_tarefas.Repositorios
                 throw new Exception($"Tarefa para o ID: {id} não foi encontrado no banco de dados");
             }
 
-            tarefaPorId.Titulo = tarefa.Titulo;
-            tarefaPorId.Descricao = tarefa.Descricao;
-            tarefaPorId.Prioridade = tarefa.Prioridade;
+            tarefaPorId.Status = tarefa.Status;
+            tarefa.UsuarioId = tarefa.UsuarioId;
 
             _dbContext.Tarefa.Update(tarefaPorId);
             await _dbContext.SaveChangesAsync();
