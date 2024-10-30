@@ -21,3 +21,4 @@ C# 8.0.403
 PostgreSQL 16
 VueJs 3.2.13
 ```
+Pronto. A aplicação está disponível em https://localhost:7175/swagger/index.html
