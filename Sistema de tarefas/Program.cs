@@ -6,7 +6,6 @@ using Sistema_de_tarefas.Data;
 using Sistema_de_tarefas.Repositorios;
 using Sistema_de_tarefas.Repositorios.Interface;
 using Npgsql;
-using Sistema_de_tarefas.Data;
 
 namespace Sistema_de_tarefas
 {
