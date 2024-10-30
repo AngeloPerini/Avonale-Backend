@@ -12,7 +12,7 @@ using Sistema_de_tarefas.Data;
 namespace Sistema_de_tarefas.Migrations
 {
     [DbContext(typeof(SistemaTarefasDBContex))]
-    [Migration("20241028175856_InitialCreate")]
+    [Migration("20241030140056_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,11 +37,6 @@ namespace Sistema_de_tarefas.Migrations
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("Prioridade")
                         .IsRequired()
