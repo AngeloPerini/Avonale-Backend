@@ -4,15 +4,14 @@ using Sistema_de_tarefas.Models;
 
 namespace Sistema_de_tarefas.Data.Map
 {
-    public class UsuarioMap : IEntityTypeConfiguration<UsuarioModel>
+    public class LoginMap : IEntityTypeConfiguration<LoginModel>
     {
-        public void Configure(EntityTypeBuilder<UsuarioModel> builder)
+        public void Configure(EntityTypeBuilder<LoginModel> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Nome).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Email).IsRequired().HasMaxLength(150);
             builder.Property(x => x.Senha).IsRequired();
-            builder.Property(x => x.Cargo).IsRequired();
+
+            builder.HasOne(x => x.Usuario);
         }
     }
 }

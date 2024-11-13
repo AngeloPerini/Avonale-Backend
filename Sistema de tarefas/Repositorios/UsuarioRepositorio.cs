@@ -19,7 +19,7 @@ namespace Sistema_de_tarefas.Repositorios
         {
             return await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
         }
-
+        
         public async Task<List<UsuarioModel>> BuscarTodosUsuarios()
         {
             return await _dbContext.Usuarios.ToListAsync();
@@ -41,6 +41,11 @@ namespace Sistema_de_tarefas.Repositorios
 
             usuarioPorId.Nome = usuario.Nome;
             usuarioPorId.Email = usuario.Email;
+            usuarioPorId.Cargo = usuario.Cargo;
+            usuarioPorId.Id = usuario.Id;   
+            usuarioPorId.Senha = usuario.Senha;
+
+
 
             _dbContext.Usuarios.Update(usuarioPorId);
             await _dbContext.SaveChangesAsync();
@@ -61,10 +66,8 @@ namespace Sistema_de_tarefas.Repositorios
             return true;
         }
 
-        
 
-        
     }
 
-
+    
 }

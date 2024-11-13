@@ -42,8 +42,12 @@ namespace Sistema_de_tarefas.Repositorios
                 throw new Exception($"Tarefa para o ID: {id} não foi encontrado no banco de dados");
             }
 
+
             tarefaPorId.Status = tarefa.Status;
-            tarefa.UsuarioId = tarefa.UsuarioId;
+            tarefaPorId.UsuarioId = tarefa.UsuarioId;
+            tarefaPorId.Titulo = tarefa.Titulo;
+            tarefaPorId.Descricao = tarefa.Descricao;
+            tarefaPorId.Prioridade = tarefa.Prioridade;
 
             _dbContext.Tarefa.Update(tarefaPorId);
             await _dbContext.SaveChangesAsync();

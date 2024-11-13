@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sistema_de_tarefas.Models;
 using Sistema_de_tarefas.Repositorios.Interface;
 
 namespace Sistema_de_tarefas.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class TarefaController : ControllerBase

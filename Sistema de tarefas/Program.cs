@@ -6,6 +6,8 @@ using Sistema_de_tarefas.Data;
 using Sistema_de_tarefas.Repositorios;
 using Sistema_de_tarefas.Repositorios.Interface;
 using Npgsql;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Sistema_de_tarefas
 {
@@ -31,8 +33,27 @@ namespace Sistema_de_tarefas
             });
 
             builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
-            builder.Services.AddScoped<ITarefaRepositorio, TarefaRepositorio>(); 
-            
+            builder.Services.AddScoped<ITarefaRepositorio, TarefaRepositorio>();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Avonale"],
+        ValidAudience = builder.Configuration["Jwt:ApiTarefa"],
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
+
 
 
             var app = builder.Build();
@@ -46,8 +67,9 @@ namespace Sistema_de_tarefas
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            
 
             app.MapControllers();
 
